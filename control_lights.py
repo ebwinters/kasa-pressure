@@ -7,13 +7,13 @@ def getBulbs(deviceDict):
 
 async def up_down(ip):
     bulb = SmartBulb(ip)
-    print (bulb)
     await bulb.update()
     if (bulb.is_on):
         await bulb.turn_off(transition=2_000)
         await bulb.update()
     else:
         await bulb.turn_on()
+        await bulb.update()
         await bulb.set_brightness(100)
         await bulb.set_color_temp(2500)
         await bulb.update()
@@ -23,12 +23,8 @@ async def main():
     found_devices = await Discover.discover()
     print (found_devices)
     bulb_ips = getBulbs(found_devices)
-    on_off_tasks = [up_down(bulb_ip) for bulb_ip in bulb_ips]
-    await asyncio.gather(*on_off_tasks)
-
-
-
-
+    for bulb_ip in bulb_ips:
+        await up_down(bulb_ip)
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
