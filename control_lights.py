@@ -1,7 +1,12 @@
 import asyncio
 from kasa import *
 
-def getBulbs(deviceDict):
+async def discover_bulbs():
+    found_devices = await Discover.discover()
+    print ("Discovered " + str(len(found_devices)) + " devices")
+    return get_bulbs(found_devices)
+
+def get_bulbs(deviceDict):
     ips = [ip for ip in deviceDict]
     return list(filter(lambda ip: deviceDict[ip].device_type == DeviceType.Bulb, ips))
 
@@ -22,10 +27,11 @@ async def up_down(ips):
             
 
 async def main():
-    found_devices = await Discover.discover()
-    print (len(found_devices))
-    bulb_ips = getBulbs(found_devices)
-    await up_down(bulb_ips)
+    while True:
+        # bulb_ips = await discover_bulbs()
+        bulb_ips = ['10.0.0.150', '10.0.0.180']
+        await up_down(bulb_ips)
+        await asyncio.sleep(10)
     
 
 if __name__ == "__main__":
