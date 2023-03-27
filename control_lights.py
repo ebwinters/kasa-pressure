@@ -1,5 +1,17 @@
 import asyncio
 from kasa import *
+from redis import Redis
+
+async def get_bulb_ips(r):
+    print ("HIIIII")
+    ips = r.get('bulb_ips')
+    # print ("IPS " + str(ips))
+    if (ips == None):
+        ips = await discover_bulbs()
+        print("DICOVERED IPS " + str(ips))
+        r.set('bulb_ips', ','.join(ips))
+        return ips
+    return ips.split(',')
 
 async def discover_bulbs():
     found_devices = await Discover.discover()
@@ -27,9 +39,10 @@ async def up_down(ips):
             
 
 async def main():
+    r = Redis(host='redis', port=6379)
+    bulb_ips = await get_bulb_ips(r)
     while True:
-        # bulb_ips = await discover_bulbs()
-        bulb_ips = ['10.0.0.150', '10.0.0.180']
+        print (bulb_ips)
         await up_down(bulb_ips)
         await asyncio.sleep(10)
     

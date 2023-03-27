@@ -2,6 +2,8 @@ services:
   redis:
     image: redislabs/redismod
     container_name: redis
+    volumes:
+      - redis-data:/data
     ports:
       - '6379:6379'
   app:
@@ -11,3 +13,6 @@ services:
       - .:/code
     depends_on:
       - redis
+volumes:
+  redis-data:
+    driver: local
