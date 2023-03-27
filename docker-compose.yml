@@ -9,6 +9,7 @@ services:
   app:
     build: .
     container_name: app
+    network_mode: host
     volumes:
       - .:/code
     depends_on:

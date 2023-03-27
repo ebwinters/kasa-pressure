@@ -39,7 +39,7 @@ async def up_down(ips):
             
 
 async def main():
-    r = Redis(host='redis', port=6379)
+    r = Redis(host='localhost', port=6379)
     bulb_ips = await get_bulb_ips(r)
     while True:
         print (bulb_ips)
