@@ -1,5 +1,5 @@
-import asyncio
 from kasa import *
+import asyncio
 
 async def discover_bulbs():
     found_devices = await Discover.discover(target='192.168.65.255')
@@ -20,18 +20,6 @@ async def up_down(ips):
             await bulb.set_brightness(100)
             await bulb.set_color_temp(2500)
             await bulb.update()
-            await bulb.turn_on(transition=2_000)
+            await bulb.turn_on()
         else:
             await bulb.turn_off(transition=2_000)
-            
-
-async def main():
-    bulb_ips = ['10.0.0.150', '10.0.0.180']
-    while True:
-        await up_down(bulb_ips)
-        await asyncio.sleep(10)
-    
-
-if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
