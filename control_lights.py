@@ -1,6 +1,13 @@
 from kasa import *
 import asyncio
+import json
 
+def read_ips():
+    f = open('config.json')
+    data = json.load(f)
+    f.close()
+    return list(data['ips'])
+    
 async def discover_bulbs():
     found_devices = await Discover.discover(target='192.168.65.255')
     return get_bulbs(found_devices)

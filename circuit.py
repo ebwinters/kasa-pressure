@@ -4,7 +4,7 @@ from control_lights import *
 import sys
 
 loop = None
-bulb_ips = ['10.0.0.150', '10.0.0.180']
+bulb_ips = read_ips()
 
 def button_callback(up_down):
     print('changing voltage event detected')
