@@ -7,14 +7,6 @@ def read_ips():
     data = json.load(f)
     f.close()
     return list(data['ips'])
-    
-async def discover_bulbs():
-    found_devices = await Discover.discover(target='192.168.65.255')
-    return get_bulbs(found_devices)
-
-def get_bulbs(deviceDict):
-    ips = [ip for ip in deviceDict]
-    return list(filter(lambda ip: deviceDict[ip].device_type == DeviceType.Bulb, ips))
 
 async def up_down(ips):
     shouldTurnOn = False
