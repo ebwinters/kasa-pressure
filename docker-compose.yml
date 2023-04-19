@@ -5,8 +5,8 @@ services:
     hostname: redis
     volumes:
       - redis-data:/data
-    networks:
-      - redis-net
+    # networks:
+    #   - redis-net
     ports:
       - '6379:6379'
   circuit:
@@ -15,23 +15,21 @@ services:
     command: ["python3", "-u", "circuit.py"]
     volumes:
       - .:/code
-    networks:
-      - redis-net
+    # networks:
+    #   - redis-net
     depends_on:
       - redis
   update_ips:
     build: .
     container_name: update_ips
-    networks:
-      - redis-net
-    # network_mode: host
+    network_mode: host
     command: ["python3", "-u", "update_ips.py"]
     volumes:
       - .:/code
     depends_on:
       - redis
-networks:
-  redis-net:
+# networks:
+#   redis-net:
 volumes:
   redis-data:
     driver: local
