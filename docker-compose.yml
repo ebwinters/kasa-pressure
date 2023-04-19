@@ -1,6 +1,6 @@
 services:
   redis:
-    image: redislabs/redismod
+    image: arm32v7/redis:6-bullseye
     container_name: redis
     hostname: redis
     volumes:
