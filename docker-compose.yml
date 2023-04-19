@@ -9,7 +9,9 @@ services:
       - '6379:6379'
   circuit:
     build: .
+    privileged: true
     container_name: circuit
+    network_mode: host
     command: ["python3", "-u", "circuit.py"]
     volumes:
       - .:/code
