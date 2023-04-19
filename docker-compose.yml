@@ -2,6 +2,7 @@ services:
   redis:
     image: redislabs/redismod
     container_name: redis
+    hostname: redis
     volumes:
       - redis-data:/data
     ports:
