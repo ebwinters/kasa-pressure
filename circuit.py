@@ -2,12 +2,14 @@ import RPi.GPIO as GPIO
 import asyncio
 from control_lights import *
 import sys
+import redis
 
 loop = None
-bulb_ips = read_ips()
+r = redis.Redis(host='localhost', port=6379)
 
 def button_callback(up_down):
     print('changing voltage event detected')
+    bulb_ips = r.get('bulb_ips').split(',')
     asyncio.run(up_down(bulb_ips))
     
 
