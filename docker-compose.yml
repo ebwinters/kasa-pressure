@@ -9,7 +9,6 @@ services:
   circuit:
     build: .
     container_name: circuit
-    network_mode: host
     command: ["python3", "-u", "circuit.py"]
     volumes:
       - .:/code
@@ -18,7 +17,7 @@ services:
   update_ips:
     build: .
     container_name: update_ips
-    network_mode: host
+    # network_mode: host
     command: ["python3", "-u", "update_ips.py"]
     volumes:
       - .:/code
