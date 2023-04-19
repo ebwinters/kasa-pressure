@@ -15,6 +15,5 @@ Control your Kasa smart lights with a Raspberry Pi
 
 * Note: When the button is not pressed, the power flows to ground. This keeps the button in a strictly on/off state*
 2. Clone this repo
-3. If you do not know the IP addresses of your bulbs, run `pip install -r requirements.txt` and then run `python3 discover.py`
-4. Copy and paste the IPs into the config.json file
-5. Run `./run.sh`, which will build and run a docker container to monitor the GPIO input and adjust the lights accordingly
+3. Install `docker` and `docker-compose` on the Pi
+4. Run `docker-compose up -d`
