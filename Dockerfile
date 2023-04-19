@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt --no-cache-dir
 
 COPY . /code
 
-CMD python3 -u circuit.py
+# CMD python3 -u circuit.py

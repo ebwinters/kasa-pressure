@@ -1,0 +1,29 @@
+services:
+  redis:
+    image: redislabs/redismod
+    container_name: redis
+    volumes:
+      - redis-data:/data
+    ports:
+      - '6379:6379'
+  circuit:
+    build: .
+    container_name: circuit
+    network_mode: host
+    command: ["python3", "-u", "circuit.py"]
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+  update_ips:
+    build: .
+    container_name: update_ips
+    network_mode: host
+    command: ["python3", "-u", "update_ips.py"]
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+volumes:
+  redis-data:
+    driver: local
