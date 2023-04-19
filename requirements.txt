@@ -1,3 +1,4 @@
 python-kasa
+redis
 asyncio
 rpi.gpio
