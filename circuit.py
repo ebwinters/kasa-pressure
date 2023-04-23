@@ -10,6 +10,7 @@ def button_callback(up_down):
     print('changing voltage event detected')
     bulb_ips = str(r.get('bulb_ips')).split(',')
     asyncio.run(up_down(bulb_ips))
+    sleep(1)
     
 
 if __name__ == '__main__':
