@@ -26,6 +26,16 @@ services:
       - .:/code
     depends_on:
       - redis
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - 9000:9000
+    volumes:
+      - data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
 volumes:
   redis-data:
+    driver: local
+  data:
     driver: local
