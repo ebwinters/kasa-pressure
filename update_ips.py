@@ -6,7 +6,7 @@ async def main():
     r = redis.Redis(host='localhost', port=6379)
     while True:
         bulb_ips = await discover_bulbs()
-        if len(bulb_ips) == 2:
+        if len(bulb_ips) == 3:
             print ("Found bulb IPS: ", str(bulb_ips))
             r.set('bulb_ips', ','.join(bulb_ips))
         else:
